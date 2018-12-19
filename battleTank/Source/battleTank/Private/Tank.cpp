@@ -28,9 +28,7 @@ void ATank::Tick(float DeltaTime)
 
 void ATank::AimAt(FVector OutHitLocation){
 	TankAimingComponent->RegisterComponent();
-	TankAimingComponent->AimAT(OutHitLocation);
-	//auto OurTankName = GetName();
-	//UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s"), *OurTankName, *OutHitLocation.ToString())
+	TankAimingComponent->AimAT(OutHitLocation, LaunchSpeed);
 }
 
 
