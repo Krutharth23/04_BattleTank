@@ -2,6 +2,8 @@
 
 #include "Tank.h"
 #include "TankAimingComponent.h"
+#include "TankBarrel.h"
+#include "Projectile.h"
 #include "Engine/World.h"
 #include "../Public/Tank.h"
 
@@ -21,19 +23,9 @@ void ATank::BeginPlay()
 	
 }
 
-void ATank::AimAt(FVector OutHitLocation){
-	TankAimingComponent->RegisterComponent();
-	TankAimingComponent->AimAT(OutHitLocation, LaunchSpeed);
-}
-
-void ATank::fire()
-{
-	auto Time = GetWorld()->GetTimeSeconds();
-	UE_LOG(LogTemp, Warning, TEXT("%f: tank firing"), Time)
-}
-
 void ATank::SetBarrelReference(UTankBarrel * BarrelToSet) {
 	TankAimingComponent->SetBarrelReference(BarrelToSet);
+	Barrel = BarrelToSet;
 }
 
 void ATank::SetTurretReference(UTankTurret * TurretToSet)
@@ -41,6 +33,23 @@ void ATank::SetTurretReference(UTankTurret * TurretToSet)
 	TankAimingComponent->SetTurretReference(TurretToSet);
 }
 
+void ATank::AimAt(FVector OutHitLocation){
+	TankAimingComponent->RegisterComponent();
+	TankAimingComponent->AimAT(OutHitLocation, LaunchSpeed);
+}
+
+void ATank::fire()
+{
+	if (!Barrel) { return; }
+
+	auto Projectile = GetWorld()->SpawnActor<AProjectile>(
+		ProjectileBlueprint,
+		Barrel->GetSocketLocation(FName("Projectile")),
+		Barrel->GetSocketRotation(FName("Projectile"))
+	);
+
+	Projectile->LaunchProjectile(LaunchSpeed);
+}
 
 
 // Called to bind functionality to input
