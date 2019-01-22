@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "TankAimingComponent.h"
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
-
+//forward declaration
 class UTankBarrel;
+class UTankAimingComponent;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -18,8 +18,6 @@ public:
 	// Sets default values for this pawn's properties
 	ATank();
 public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
 
 	void AimAt(FVector OutHitLocation);
 
