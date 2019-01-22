@@ -2,6 +2,7 @@
 
 #include "Tank.h"
 #include "TankAimingComponent.h"
+#include "Engine/World.h"
 #include "../Public/Tank.h"
 
 
@@ -25,6 +26,11 @@ void ATank::AimAt(FVector OutHitLocation){
 	TankAimingComponent->AimAT(OutHitLocation, LaunchSpeed);
 }
 
+void ATank::fire()
+{
+	auto Time = GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Warning, TEXT("%f: tank firing"), Time)
+}
 
 void ATank::SetBarrelReference(UTankBarrel * BarrelToSet) {
 	TankAimingComponent->SetBarrelReference(BarrelToSet);
@@ -34,6 +40,8 @@ void ATank::SetTurretReference(UTankTurret * TurretToSet)
 {
 	TankAimingComponent->SetTurretReference(TurretToSet);
 }
+
+
 
 // Called to bind functionality to input
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent){
