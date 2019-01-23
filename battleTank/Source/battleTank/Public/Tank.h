@@ -23,13 +23,9 @@ public:
 
 	void AimAt(FVector OutHitLocation);
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	UTankAimingComponent* TankAimingComponent = nullptr;
 
-	UTankAimingComponent* TankAimingComponent=nullptr;
-
-	UFUNCTION(BlueprintCallable,Category=Setup)
+	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
@@ -37,6 +33,11 @@ protected:
 
 	UFUNCTION(BlueprintCallable)
 	void fire();
+
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
 
 private:
 	// Called to bind functionality to input
@@ -50,4 +51,8 @@ private:
 
 	//local barrel reference
 	UTankBarrel* Barrel = nullptr;
+
+	float ReloadTimeSEC = 3;
+
+	double LastFireTime = 0;
 };
