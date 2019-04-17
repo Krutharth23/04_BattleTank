@@ -27,7 +27,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet);
 
-
+private:
+	//called form pathfinding logic
 	void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
 
 

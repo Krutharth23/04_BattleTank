@@ -23,7 +23,7 @@ public:
 public:
 
 	void AimAt(FVector OutHitLocation);
-
+	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
 	UPROPERTY(BlueprintReadOnly)
