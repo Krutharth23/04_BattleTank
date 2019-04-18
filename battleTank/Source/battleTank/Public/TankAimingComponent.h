@@ -9,8 +9,9 @@
 #include "TankAimingComponent.generated.h"
 
 //forward declaration
-class UTankBarrel; 
+class UTankBarrel;
 class UTankTurret;
+class AProjectile;
 class UTankAimingComponent;
 
 UENUM()
@@ -38,17 +39,21 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	//void AimAT(FVector OutHitLocation, float LaunchSpeed);
+	UFUNCTION(BlueprintCallable)
+	void fire();
 
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
-		float LaunchSpeed = 4000;
+	float LaunchSpeed = 4000;
+
 	void AimAt(FVector OutHitLocation);
 
 private:
+	UPROPERTY(EditAnywhere, Category = setup)
+	TSubclassOf<AProjectile> ProjectileBlueprint;
 
 	UTankBarrel* Barrel = nullptr;
 
@@ -56,5 +61,8 @@ private:
 	
 	void MoveBarrelTowards(FVector AimDirection);
 
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float ReloadTimeSEC = 3;
 	
+	double LastFireTime = 0;
 };

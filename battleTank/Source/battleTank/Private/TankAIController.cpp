@@ -22,7 +22,7 @@ void ATankAIController::Tick(float DeltaTime) {
 		aimingcomponent->AimAt(playerPawn->GetActorLocation());
 
 		//fire when ready
-		//controlledTank->fire();
+		aimingcomponent->fire();
 	}
 
 
