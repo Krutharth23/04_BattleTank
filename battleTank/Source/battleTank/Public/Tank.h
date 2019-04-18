@@ -29,11 +29,6 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	UTankMovementComponent* TankMovementComponent = nullptr;
 
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetTurretReference(UTankTurret* TurretToSet);
 
 	UFUNCTION(BlueprintCallable)
 	void fire();
@@ -44,8 +39,6 @@ protected:
 
 
 private:
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float LaunchSpeed = 4000;
@@ -56,8 +49,7 @@ private:
 	UPROPERTY(EditAnywhere, Category = setup)
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
-	//local barrel reference
-	UTankBarrel* Barrel = nullptr;
-
 	double LastFireTime = 0;
+	//local barrel reference
+	UTankBarrel* Barrel = nullptr;//TODO remove
 };
