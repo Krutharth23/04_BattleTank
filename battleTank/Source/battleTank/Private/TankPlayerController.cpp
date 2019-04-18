@@ -2,13 +2,10 @@
 
 #include "TankPlayerController.h"
 #include "TankAimingComponent.h"
-#include "Tank.h"
 
 void ATankPlayerController::BeginPlay() {
 	Super::BeginPlay();
-	auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
-	if (AimingComponent) { FoundAimingComponent(AimingComponent); }
-	else { return; }
+	
 }
 
 void ATankPlayerController::Tick(float DeltaTime) {
@@ -16,15 +13,15 @@ void ATankPlayerController::Tick(float DeltaTime) {
 	AimTowardsCrosshair();
 }
 
-ATank* ATankPlayerController::GetControlledTank() const {
-	return Cast<ATank>(GetPawn());
-}
-
 void ATankPlayerController::AimTowardsCrosshair() {
-	if (!ensure(GetControlledTank())) { return; }
+
+	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+	if (AimingComponent) { FoundAimingComponent(AimingComponent); }
+	else { return; }
+
 	FVector OutHitLocation;
 	if (GetSightRayHitLoacation(OutHitLocation)) {
-		GetControlledTank()->AimAt(OutHitLocation);
+		AimingComponent->AimAt(OutHitLocation);
 	}
 
 }
@@ -34,7 +31,6 @@ bool ATankPlayerController::GetSightRayHitLoacation(FVector& OutHitLocation) con
 	int32 ViewportSizeX, ViewportSizeY;
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
 	auto screenLocation = FVector2D(CrossHairXLocation * ViewportSizeX, CrossHairYLocation * ViewportSizeY);
-	//UE_LOG(LogTemp, Warning, TEXT("screen size: %s"), *screenLocation.ToString())
 
 
 	FVector LookDirection;

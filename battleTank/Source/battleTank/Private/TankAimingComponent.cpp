@@ -31,6 +31,8 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	//controlledTank->AimAt(playerPawn->GetActorLocation());
+
 	// ...
 }
 
@@ -41,7 +43,7 @@ void UTankAimingComponent::initialise(UTankBarrel * BarrelToSet, UTankTurret * T
 	Turret = TurretToSet;
 }
 
-void UTankAimingComponent::AimAT(FVector OutHitLocation, float LaunchSpeed) {
+void UTankAimingComponent::AimAt(FVector OutHitLocation) {
 
 	if (!ensure(Barrel)) { return; }
 	
@@ -75,3 +77,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
 	Barrel->Elevate(DeltaRotation.Pitch);
 }
 
+//void UTankAimingComponent::AimAt(FVector OutHitLocation) {
+//	RegisterComponent();
+//	AimAT(OutHitLocation, LaunchSpeed);
+//}

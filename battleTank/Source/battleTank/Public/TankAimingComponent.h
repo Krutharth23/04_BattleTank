@@ -11,6 +11,7 @@
 //forward declaration
 class UTankBarrel; 
 class UTankTurret;
+class UTankAimingComponent;
 
 UENUM()
 enum class EFiringState : uint8 {Reloading, Aiming, Locked};
@@ -37,11 +38,15 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	void AimAT(FVector OutHitLocation, float LaunchSpeed);
+	//void AimAT(FVector OutHitLocation, float LaunchSpeed);
 
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
+
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+		float LaunchSpeed = 4000;
+	void AimAt(FVector OutHitLocation);
 
 private:
 
