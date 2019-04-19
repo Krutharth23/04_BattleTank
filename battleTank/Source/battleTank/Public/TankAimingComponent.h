@@ -26,6 +26,7 @@ class BATTLETANK_API UTankAimingComponent : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UTankAimingComponent();
+	EFiringState GetFiringState() const;
 
 protected:
 	// Called when the game starts
