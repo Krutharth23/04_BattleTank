@@ -15,7 +15,7 @@ class AProjectile;
 class UTankAimingComponent;
 
 UENUM()
-enum class EFiringState : uint8 {Reloading, Aiming, Locked};
+enum class EFiringState : uint8 {Reloading, Aiming, Locked, OutOfAmmo};
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 
@@ -50,6 +50,9 @@ public:
 
 	void AimAt(FVector OutHitLocation);
 
+	UFUNCTION(BlueprintCallable)
+	int GetRoundsLeft() const;
+
 private:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
@@ -69,4 +72,6 @@ private:
 	double LastFireTime = 0;
 	bool IsBarrelMoviong();
 	FVector AimDirection;
+
+	int RoundsLeft = 3;
 };
