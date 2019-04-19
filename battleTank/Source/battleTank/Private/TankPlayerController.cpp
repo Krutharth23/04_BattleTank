@@ -36,10 +36,10 @@ bool ATankPlayerController::GetSightRayHitLoacation(FVector& OutHitLocation) con
 	FVector LookDirection;
 	if (GetLookDirection(screenLocation, LookDirection)) {
 		//LineTrince along the dot
-		GetLookVectorHitLoacation(LookDirection, OutHitLocation);
+		return GetLookVectorHitLoacation(LookDirection, OutHitLocation);
 	}
 
-	return true;
+	return false;
 }
 
 bool ATankPlayerController::GetLookDirection(FVector2D screenLocation, FVector& LookDirection) const {
