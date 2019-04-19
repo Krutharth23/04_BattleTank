@@ -21,9 +21,17 @@ public:
 	
 	//max force in Newtons
 	UPROPERTY(EditDefaultsOnly, Category = setup)
-	float TrackMaxDrivingForce = 4000;
+	float TrackMaxDrivingForce = 40000;
 
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	void ApplySideWaysForce();
+
+	void DriveTrack();
+
+	float currentThrottle = 0.0;
 
 	UTankTrack();
+	virtual void BeginPlay() override;
+
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 };
