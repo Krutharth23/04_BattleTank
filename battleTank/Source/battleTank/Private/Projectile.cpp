@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Projectile.h"
-
+#include "Runtime/Engine/Classes/Particles/ParticleSystemComponent.h"
 
 // Sets default values
 AProjectile::AProjectile()
@@ -10,6 +10,13 @@ AProjectile::AProjectile()
 	PrimaryActorTick.bCanEverTick = true;
 
 	projectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(FName("projectile Movement"));
+	CollisionMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("collision mesh"));
+	SetRootComponent(CollisionMesh);
+	CollisionMesh->SetVisibility(false);
+	CollisionMesh->SetNotifyRigidBodyCollision(true);
+
+	LaunchBlast = CreateDefaultSubobject<UParticleSystemComponent>(FName("partile sys"));
+	LaunchBlast->AttachTo(RootComponent);
 	projectileMovement->bAutoActivate = false;
 }
 

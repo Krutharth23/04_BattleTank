@@ -82,7 +82,7 @@ void UTankAimingComponent::AimAt(FVector OutHitLocation) {
 	}
 }
 
-int UTankAimingComponent::GetRoundsLeft() const
+int32 UTankAimingComponent::GetRoundsLeft() const
 {
 	return RoundsLeft;
 }
