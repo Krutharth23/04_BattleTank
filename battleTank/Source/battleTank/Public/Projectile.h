@@ -5,7 +5,9 @@
 #include "CoreMinimal.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "GameFramework/Actor.h"
+#include "Runtime/Engine/Classes/PhysicsEngine/RadialForceComponent.h"
 #include "Projectile.generated.h"
+
 
 UCLASS()
 class BATTLETANK_API AProjectile : public AActor
@@ -41,4 +43,7 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = "components")
 	UParticleSystemComponent* ImpactBlast;
+
+	UPROPERTY(VisibleAnywhere, Category = "components")
+	URadialForceComponent* ExplosionForce;
 };
