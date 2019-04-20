@@ -21,4 +21,9 @@ protected:
 	//how close can ai can come
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	float acceptanceRadius = 8000;
+
+	virtual void SetPawn(APawn* InPawn) override;
+
+	UFUNCTION()
+	void OnTankDeath();
 };
