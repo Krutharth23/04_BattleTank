@@ -23,15 +23,9 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = setup)
 	float TrackMaxDrivingForce = 40000;
 
-	void ApplySideWaysForce();
-
-	void DriveTrack();
-
-	float currentThrottle = 0.0;
-
 	UTankTrack();
-	virtual void BeginPlay() override;
 
-	UFUNCTION()
-	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+	TArray<class ASprungWheel*> GetWheels()const;
+	
+	void DriveTrack(float currentThrottle);
 };

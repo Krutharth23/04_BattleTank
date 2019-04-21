@@ -24,6 +24,16 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	void AddDrivingForce(float ForceMagnitude);
+
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent * HitComponent, AActor * OtherActor, UPrimitiveComponent * OtherComp, FVector NormalImpulse, const FHitResult & Hit);
+
+	void ApplyForce();
+
+	float TotalForceMagnitudeTF;
+
 private:
 	UPROPERTY(VisibleAnywhere, Category = "components")
 	USphereComponent* Axal;
@@ -32,7 +42,7 @@ private:
 	UPhysicsConstraintComponent* AxelConstriant;
 
 	UPROPERTY(VisibleAnywhere, Category = "components")
-	USphereComponent* Wheal;
+	USphereComponent* Wheel;
 	
 	UPROPERTY(VisibleAnywhere, Category = "components")
 	UPhysicsConstraintComponent* constraint;
